@@ -20,4 +20,8 @@ export class PropertiesService {
   getProperties(): Observable<Property[]>{
     return this.http.get<Property[]>(`${this.apiUrl}/logements`);
   }
+
+  getPropertyById(id : string): Observable<Property>{
+    return this.http.get<Property>(`${this.apiUrl}/logement?id=${id}`);
+  }
 }

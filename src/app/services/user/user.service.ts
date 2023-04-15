@@ -37,14 +37,25 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}/auth/register`, body)
   }
   public setUser(token: string): void {
+    console.log(this.jwtHelper.decodeToken(token))
     this.user = this.jwtHelper.decodeToken(token);
   }
 
   public getUsername(): string {
+    this.restaureLogin()
     if(this.user == null){
       return "";
     }
     return this.user.sub;
+  }
+
+  public getUserId() : string {
+    this.restaureLogin()
+    console.log(this.user);
+    if(this.user == null){
+      return "";
+    }
+    return this.user.idu;
   }
 
   public getRole(): string {

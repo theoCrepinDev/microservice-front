@@ -1,0 +1,77 @@
+<div>
+  <div class="logement-photos">
+    <div class="container">
+      <h3 id="home-title">{{ property.titre }}</h3>
+      <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let photo of property.photos">
+          <div class="wrapper">
+            <img [src]="photo.lien" alt="Random first slide" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+  <div class="logement-presentation">
+    <div class="logement-pres"></div>
+    <div class="logement-resa-part">
+      <div class="card" style="width: 18rem">
+        <img
+          [src]="property.photos[0].lien"
+          class="card-img-top"
+          alt="Chicago Skyscrapers"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Faire une réservation</h5>
+          <p class="card-text">
+            Sélectionnez vos dates et le nombre de personnes pour réserver !
+          </p>
+        </div>
+        <ul class="list-group list-group-light list-group-small">
+          <li class="list-group-item px-4">
+            <div>
+              <label for="nbrPersonnes" id="nbrPersonnes"
+                >Nombre de personnes :</label
+              >
+              <input
+                type="number"
+                name="nbrPersonnes"
+                id="nbrPersonnes"
+                [(ngModel)]="reservation.nbrPersonnes"
+              />
+            </div>
+          </li>
+          <li class="list-group-item px-4">
+            <div>
+              <label for="dateDebut" id="dateDebut">Date d'arrivée :</label>
+              <input
+                type="date"
+                name="dateDebut"
+                id="dateDebut"
+                [(ngModel)]="reservation.dateDebut"
+                (change)="reservationUpdate()"
+              />
+            </div>
+          </li>
+          <li class="list-group-item px-4">
+            <div>
+              <label for="dateFin" id="dateFin" >Date de départ :</label>
+              <input
+                type="date"
+                name="dateFin"
+                id="dateFin"
+                [(ngModel)]="reservation.dateFin"
+                (change)="reservationUpdate()"
+              />
+            </div>
+          </li>
+          <li class="list-group-item px-4">
+            <p>Prix de la réservation : {{reservation.prix / 100}} €</p>
+          </li>
+        </ul>
+        <div class="card-body">
+          <a (click)="postReservation()" class="card-link">Valider la réservation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="filters">
+    <div class="form-outline mb-4">
+      <label class="form-label" for="datatable-search-input">Search : </label>
+      <input
+        type="search"
+        class="form-control"
+        id="datatable-search-input"
+        placeholder="Titre"
+        [(ngModel)]="titreSearch"
+        (change)="findByTitle()"
+      />
+    </div>
+
+    <div class="to-flex">
+      <div class="ville-filtre">
+        <p>Ville de recherche :</p>
+        <div class="form-check" *ngFor="let ville of villesFilter()">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex{{ ville }}"
+            value="{{ ville }}"
+            [(ngModel)]="villeToFilter"
+            (change)="filterVille()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            {{ ville }}
+          </label>
+        </div>
+      </div>
+      <div class="budget-filter">
+        <p>Budget :</p>
+        <div class="form-check">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex0"
+            value="0"
+            [(ngModel)]="budgetToFilter"
+            (change)="fullBudget()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Pas de limites
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex10"
+            value="10"
+            [(ngModel)]="budgetToFilter"
+            (change)="budgetFilter()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Moins de 10 € par nuit
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex30"
+            value="30"
+            [(ngModel)]="budgetToFilter"
+            (change)="budgetFilter()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Moins de 30 € par nuit
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex60"
+            value="60"
+            [(ngModel)]="budgetToFilter"
+            (change)="budgetFilter()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Moins de 60 € par nuit
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            mdbRadio
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flex100"
+            value="100"
+            [(ngModel)]="budgetToFilter"
+            (change)="budgetFilter()"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Moins de 100 € par nuit
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="datatable">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">nombre Pièces</th>
+          <th scope="col">m²</th>
+          <th scope="col">Etages</th>
+          <th scope="col">Description</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Ville</th>
+          <th scope="col">Prix / nuits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of toDisplayProperties()" routerLink="/property" [queryParams]="{id: property.id}">
+          <th scope="row">{{ property.titre }}</th>
+          <th scope="row">{{ property.nbrPieces }}</th>
+          <th scope="row">{{ property.taille }}</th>
+          <th scope="row">{{ property.nbrEtages }}</th>
+          <th scope="row">{{ property.description }}</th>
+          <th scope="row">{{ property.adresse }}</th>
+          <th scope="row">{{ property.ville }}</th>
+          <th scope="row">{{ property.prix / 100 }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

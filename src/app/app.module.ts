@@ -10,12 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserModule } from './user/user.module';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { SearchComponent } from './search/search.component';
+import { PropertyComponent } from './property/property.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchComponent,
+    PropertyComponent
   ],
   imports: [
     HttpClientModule,
@@ -27,7 +31,8 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
       config: {
         tokenGetter: () => localStorage.getItem('token')
       }
-    })
+    }),
+    FormsModule
   ],
   providers: [
   ],
