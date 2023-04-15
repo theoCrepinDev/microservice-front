@@ -1,0 +1,13 @@
+<div class="container">
+  <h3 id="home-title">Find your stay for vacation or more !</h3>
+  <ngb-carousel>
+    <ng-template ngbSlide  *ngFor="let property of properties">
+      <div class="wrapper" >
+        <img [src]="property.photos[0].lien" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>{{property.ville}}</h3>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
