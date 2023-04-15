@@ -37,4 +37,8 @@ export class ReservationService {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.delete<Reservation>(`${this.apiUrl}/reservations?reservation-id=${res.id}`, {headers})
   }
+
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<any>(`${this.apiUrl}/reservations`)
+  }
 }

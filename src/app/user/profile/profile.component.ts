@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { delay } from 'rxjs';
 import { Property } from 'src/app/objects/Property';
 import { Reservation } from 'src/app/objects/Reservation';
+import { User } from 'src/app/objects/User';
 import { PropertiesService } from 'src/app/services/properties/properties.service';
 import { ReservationService } from 'src/app/services/reservations/reservation.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit{
   allProperties : Property[]
   reservations : Reservation[] = new Array()
   userReservation : Reservation[] = new Array()
+  allReservations : Reservation[] = new Array()
+  users : User[] = new Array()
 
   ngOnInit(): void {
     if(!this.userService.isLoggedIn()){
@@ -48,6 +51,21 @@ export class ProfileComponent implements OnInit{
         this.getReservations()
       }
     )
+    this.reservationService.getReservations().subscribe(
+      success => {
+        this.allReservations = success
+        this.getReservations()
+      }
+    )
+
+    this.userService.getAllUsers().subscribe(
+      success => {
+        for(let user of success['user']){
+          this.users.push(new User(user['username'], user['role']['role']))
+        }
+        console.log(this.users)
+      }
+    )
   }
 
   getRole() : string{
@@ -57,6 +75,9 @@ export class ProfileComponent implements OnInit{
     }
     if(role.includes("OWNER")){
       return "propriétaire"
+    }
+    if(role.includes("ADMIN")){
+      return "admin"
     }
     return "autre"
   }
@@ -77,6 +98,14 @@ export class ProfileComponent implements OnInit{
         }
        )
     }
+  }
+
+  switchUserRole(us : string, role:string){
+    this.userService.switchRole(us, role).subscribe(
+      success => {
+        window.location.reload()
+      }
+     )
   }
 
   getLogementReservation(id : string ){

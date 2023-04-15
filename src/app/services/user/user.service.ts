@@ -42,6 +42,10 @@ export class UserService {
     return this.http.put<any>(`${this.apiUrl}/user/switch-role`, body)
   }
 
+  getAllUsers(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/user/all`)
+  }
+
   public setUser(token: string): void {
     this.user = this.jwtHelper.decodeToken(token);
   }
