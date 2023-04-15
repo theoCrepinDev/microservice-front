@@ -59,7 +59,12 @@ export class PropertyComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error => {
+        if(error.error){
         alert(error.error.message)
+        }else{
+          alert("Veuillez vous connecter")
+          this.router.navigate(['/user/login'])
+        }
       }
     )
   }

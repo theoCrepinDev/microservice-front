@@ -5,13 +5,15 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { SearchComponent } from './search/search.component';
 import { PropertyComponent } from './property/property.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path: 'user/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'property', component: PropertyComponent}
+  {path: 'property', component: PropertyComponent},
+  {path: 'user/profile', component: ProfileComponent}
 ];
 
 @NgModule({

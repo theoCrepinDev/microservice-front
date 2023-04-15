@@ -11,8 +11,29 @@
       </ngb-carousel>
     </div>
   </div>
-  <div class="logement-presentation">
-    <div class="logement-pres"></div>
+  <div class="logement-presentation container">
+    <div class="logement-pres">
+      <div>
+        <h3>Description : </h3>
+        <p>{{property.description}}</p>
+      </div>
+      <div>
+        <h5>Nombre de pièces : {{property.nbrPieces}}</h5>
+        <h5>Nombre de pièces : {{property.nbrEtages}}</h5>
+        <h5>Nombre de pièces : {{property.taille}}</h5>
+      </div>
+      <div>
+        <h3>Adresse : </h3>
+        <p>{{property.adresse}}<br>
+        {{property.ville}} {{property.codePostal}}<br>
+        {{property.pays}}</p>
+      </div>
+
+      <div>
+        <h3>Liste des options présentes : </h3>
+        <p *ngFor="let item of property.options">{{item.nom}}</p>
+      </div>
+    </div>
     <div class="logement-resa-part">
       <div class="card" style="width: 18rem">
         <img

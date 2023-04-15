@@ -36,8 +36,13 @@ export class UserService {
     }
     return this.http.post<any>(`${this.apiUrl}/auth/register`, body)
   }
+
+  switchRole(username : string, newrole : string){
+    var body = {"username" : username, "newrole": newrole}
+    return this.http.put<any>(`${this.apiUrl}/user/switch-role`, body)
+  }
+
   public setUser(token: string): void {
-    console.log(this.jwtHelper.decodeToken(token))
     this.user = this.jwtHelper.decodeToken(token);
   }
 
@@ -51,7 +56,6 @@ export class UserService {
 
   public getUserId() : string {
     this.restaureLogin()
-    console.log(this.user);
     if(this.user == null){
       return "";
     }
@@ -59,6 +63,7 @@ export class UserService {
   }
 
   public getRole(): string {
+    this.restaureLogin()
     if(this.user == null){
       return "";
     }

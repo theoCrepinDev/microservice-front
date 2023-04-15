@@ -1,2 +1,9 @@
-#property-picture{
+.logement-presentation{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logement-photos{
+  margin-bottom: 40px;
 }

@@ -21,4 +21,20 @@ export class ReservationService {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.post<Reservation>(`${this.apiUrl}/reservations`, reservation, {headers})
   }
+
+  getLogementReservations(id: string ) : Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/logement/reservations?logement-id=${id}`)
+  }
+
+  getUserReservations(): Observable<Reservation[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.get<any>(`${this.apiUrl}/reservations/me`, {headers})
+  }
+
+  deleteReservation(res : Reservation): Observable<Reservation>{
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.delete<Reservation>(`${this.apiUrl}/reservations?reservation-id=${res.id}`, {headers})
+  }
 }

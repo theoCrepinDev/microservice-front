@@ -24,4 +24,11 @@ export class PropertiesService {
   getPropertyById(id : string): Observable<Property>{
     return this.http.get<Property>(`${this.apiUrl}/logement?id=${id}`);
   }
+
+  getUserProperties(): Observable<Property[]>{
+
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.get<Property[]>(`${this.apiUrl}/logements/me`, {headers})
+  }
 }

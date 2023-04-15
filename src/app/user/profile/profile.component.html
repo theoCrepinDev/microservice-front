@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="owner-profile profile" *ngIf="getRole() === 'propriétaire'">
+    <div class="introduction">
+      <h3>Mon profil :</h3>
+      <p>
+        Vous êtes un {{ getRole() }}, <br />
+        Vous pouvez voir ici vos réservation sur vos logements et voir vos
+        logement pour les modifier ou les supprimer.
+      </p>
+    </div>
+    <div class="reservations">
+      <h3>Réservation :</h3>
+      <div id="datatable">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Logement</th>
+              <th scope="col">Date de début</th>
+              <th scope="col">Date de fin</th>
+              <th scope="col">Nombre de personnes</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations">
+              <th scope="row">
+                {{ getLogementFromId(reservation.idLogement) }}
+              </th>
+              <th scope="row">{{ reservation.dateDebut }}</th>
+              <th scope="row">{{ reservation.dateFin }}</th>
+              <th scope="row">{{ reservation.nbrPersonnes }}</th>
+              <th scope="row">{{ reservation.prix / 100 }}</th>
+              <th scope="row">{{ reservation.status }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="properties">
+      <h3>Mes logements :</h3>
+      <div id="datatable">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Titre</th>
+              <th scope="col">Description</th>
+              <th scope="col">Adresse</th>
+              <th scope="col">Ville</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let logement of properties">
+              <th scope="row">{{ logement.titre }}</th>
+              <th scope="row">{{ logement.description }}</th>
+              <th scope="row">{{ logement.adresse }}</th>
+              <th scope="row">{{ logement.ville }}</th>
+              <th scope="row">
+                <button
+                  class="btn btn-primary"
+                  routerLink="/property"
+                  [queryParams]="{ id: logement.id }"
+                >
+                  Voir
+                </button>
+                <button
+                  class="btn btn-warning"
+                  (click)="alert('Not yet implemented')"
+                >
+                  Modifier
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="alert('Not yet implemented')"
+                >
+                  Supprimer
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="switch-role">
+      <p>
+        Vous pouvez changer de vues (propriétaire / locatiare) pour gérer vos
+        appartements ou vos réservations : <br />Vous devrez vous reconnecter
+      </p>
+      <button class="btn btn-warning" (click)="switchRole()">
+        Changer de rôle
+      </button>
+    </div>
+  </div>
+
+  <div class="owner-profile profile" *ngIf="getRole() === 'locataire'">
+    <div class="introduction">
+      <h3>Mon profil :</h3>
+      <p>
+        Vous êtes un {{ getRole() }}, <br />
+        Vous pouvez voir ici vos réservation pour les modifier ou les supprimer.
+      </p>
+    </div>
+
+    <div class="reservations">
+      <h3>Réservation :</h3>
+      <div id="datatable">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Logement</th>
+              <th scope="col">Date de début</th>
+              <th scope="col">Date de fin</th>
+              <th scope="col">Nombre de personnes</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of userReservation">
+              <th scope="row">
+                {{ getLogementFromIdAll(reservation.idLogement) }}
+              </th>
+              <th scope="row">{{ reservation.dateDebut }}</th>
+              <th scope="row">{{ reservation.dateFin }}</th>
+              <th scope="row">{{ reservation.nbrPersonnes }}</th>
+              <th scope="row">{{ reservation.prix / 100 }}</th>
+              <th scope="row">{{ reservation.status }}</th>
+              <th scope="row">
+                <button class="btn btn-danger" (click)="delReservation(reservation)">Supprimer</button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="switch-role">
+      <p>
+        Vous pouvez changer de vues (propriétaire / locatiare) pour gérer vos
+        appartements ou vos réservations : <br />Vous devrez vous reconnecter
+      </p>
+      <button class="btn btn-warning" (click)="switchRole()">
+        Changer de rôle
+      </button>
+    </div>
+  </div>
+</div>
